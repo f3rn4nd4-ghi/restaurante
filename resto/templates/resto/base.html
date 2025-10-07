@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}Resto{% endblock %}</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    header a { margin-right: 12px; }
+    form { margin: 16px 0; }
+    table { border-collapse: collapse; margin-top: 12px; }
+    th, td { border: 1px solid #ddd; padding: 6px 10px; }
+    th { background: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/productos/">Productos</a>
+    <a href="/clientes/">Clientes</a>
+    <a href="/servicios/">Servicios</a>
+    <a href="/admin/">Admin</a>
+  </header>
+  <hr />
+  {% block content %}{% endblock %}
+</body>
+</html>

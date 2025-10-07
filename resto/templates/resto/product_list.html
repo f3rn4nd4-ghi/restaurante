@@ -1,0 +1,36 @@
+{% extends 'resto/base.html' %}
+{% load humanize %}
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<h1>Productos</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Agregar</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio (COP)</th>
+      <th>Activo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in products %}
+      <tr>
+        <td>{{ p.name }}</td>
+        <td>COP ${{ p.price|intcomma }}</td>
+        <td>{{ p.is_active }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="3">No hay productos</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

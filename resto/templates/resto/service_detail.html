@@ -1,0 +1,45 @@
+{% extends 'resto/base.html' %}
+{% load humanize %}
+{% block title %}Servicio {{ service.id }}{% endblock %}
+
+{% block content %}
+<h1>Servicio #{{ service.id }}</h1>
+<p>
+  <strong>Cliente:</strong> {{ service.customer }} |
+  <strong>Fecha:</strong> {{ service.created_at|date:"Y-m-d H:i" }}
+</p>
+
+<h2>Agregar ítem</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ item_form.as_p }}
+  <button type="submit">Agregar</button>
+</form>
+
+<h2>Ítems</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Subtotal (COP)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+      <tr>
+        <td>{{ i.product.name }}</td>
+        <td>{{ i.quantity }}</td>
+        <td>COP ${{ i.subtotal|intcomma }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="3">Sin ítems</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p><strong>Total:</strong> COP ${{ service.total|intcomma }}</p>
+<p><a href="/servicios/">Volver a servicios</a></p>
+{% endblock %}
